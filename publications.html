@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - Guanxing Chen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066cc;
+            --text-primary: #222;
+            --text-secondary: #666;
+            --bg-light: #f8f9fa;
+            --border: #e0e0e0;
+            --link-hover: #0052a3;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            background: white;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Publications Header */
+        .publications-header {
+            padding: 4rem 0 3rem;
+            text-align: center;
+            background: var(--bg-light);
+        }
+
+        .publications-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .publications-stats {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Category Section */
+        .category-section {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: start;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-image {
+            width: 200px;
+            height: 150px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .category-info h2 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .category-description {
+            color: var(--text-secondary);
+        }
+
+        /* Publication Item */
+        .pub-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .pub-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .pub-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 600;
+            margin-right: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .pub-title {
+            display: inline;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .pub-authors {
+            margin-top: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .pub-authors strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .pub-venue {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .pub-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .pub-link:hover {
+            text-decoration: underline;
+        }
+
+        /* IF Badge */
+        .if-badge {
+            display: inline-block;
+            margin-left: 0.5rem;
+            padding: 0.2rem 0.6rem;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .category-header {
+                flex-direction: column;
+            }
+            
+            .category-image {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" style="font-weight: 600; text-decoration: none; color: var(--text-primary);">Guanxing Chen</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="publications.html" class="active">Publications</a></li>
+                <li><a href="index.html#education">Education</a></li>
+                <li><a href="index.html#service">Service</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Publications Header -->
+    <div class="publications-header">
+        <div class="container">
+            <h1>Publications</h1>
+            <p class="publications-stats">35 peer-reviewed papers | 650+ citations | H-index: 14</p>
+            <p style="margin-top: 0.5rem; color: var(--text-secondary);">* denotes equal contribution, † denotes corresponding author</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <!-- Multi-modal AI & Cellular Data Integration -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-image">
+                    <img src="path/to/multimodal-ai-figure.png" alt="Multi-modal AI" style="max-width: 100%; max-height: 100%;">
+                </div>
+                <div class="category-info">
+                    <h2>Multi-modal AI & Cellular Data Integration</h2>
+                    <p class="category-description">Developing advanced multi-modal fusion methods for integrating heterogeneous biological data including single-cell, drug-target, and molecular representations.</p>
+                </div>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">1</span>
+                <span class="pub-title">Modal-NexT: Toward unified heterogeneous cellular data integration</span>
+                <span class="if-badge">IF: 15.5</span>
+                <div class="pub-authors">Z. Tang, <strong>G. Chen</strong>, S. Chen, H. He, J. Huang, T. Dong, J. Zhou, L. Zhao, L. You†, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Information Fusion, 2025, 125: 103479</div>
+                <a href="https://doi.org/10.1021/acs.jctc.4c00663" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">3</span>
+                <span class="pub-title">Dual modality feature fused neural network integrating binding site information for drug target affinity prediction</span>
+                <span class="if-badge">IF: 12.4</span>
+                <div class="pub-authors">H. He*, <strong>G. Chen</strong>*, Z. Tang, C.Y.-C. Chen†</div>
+                <div class="pub-venue">npj Digital Medicine, 2025, 8(1): 67</div>
+                <a href="https://doi.org/10.1038/s41746-025-01464-x" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">6</span>
+                <span class="pub-title">Modal-nexus auto-encoder for multi-modality cellular data integration and imputation</span>
+                <span class="if-badge">IF: 14.7</span>
+                <div class="pub-authors">Z. Tang, <strong>G. Chen</strong>, S. Chen, L. You†, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Nature Communications, 2024, 15(1): 9021</div>
+                <a href="https://doi.org/10.1038/s41467-024-53355-6" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">11</span>
+                <span class="pub-title">Comprehensive View Embedding Learning for Single-Cell Multimodal Integration</span>
+                <span class="if-badge">CCF A</span>
+                <div class="pub-authors">Z. Tang, J. Huang, <strong>G. Chen</strong>, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Proceedings of the AAAI Conference on Artificial Intelligence, 2024, 38(14): 15292-15300</div>
+                <a href="http://dx.doi.org/10.1609/aaai.v38i14.29453" class="pub-link">[Paper]</a>
+            </div>
+        </section>
+
+        <!-- Drug-Target Affinity Prediction -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-image">
+                    <img src="path/to/dta-figure.png" alt="Drug-Target Affinity" style="max-width: 100%; max-height: 100%;">
+                </div>
+                <div class="category-info">
+                    <h2>Drug-Target Affinity Prediction</h2>
+                    <p class="category-description">Advanced deep learning models for predicting drug-target interactions and binding affinities, enabling efficient drug discovery and repurposing.</p>
+                </div>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">4</span>
+                <span class="pub-title">MMFA-DTA: Multi-Modal Feature Attention Fusion Network for Drug-Target Affinity Prediction for Drug Repurposing Against SARS-CoV-2</span>
+                <span class="if-badge">IF: 5.7</span>
+                <div class="pub-authors"><strong>G. Chen</strong>*, H. He*, Q. Lv*, L. Zhao, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Journal of Chemical Theory and Computation, 2024, 20(18): 8071-8087</div>
+                <a href="https://doi.org/10.1021/acs.jctc.4c00663" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">20</span>
+                <span class="pub-title">GINCM-DTA: A graph isomorphic network with protein contact map representation for transferable drug repurposing against COVID-19</span>
+                <span class="if-badge">IF: 8.665</span>
+                <div class="pub-authors"><strong>G. Chen</strong>*, H. He*, L. Zhao, Q. Lv, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Expert Systems with Applications, 2024, 236: 121274</div>
+                <a href="https://doi.org/10.1016/j.eswa.2023.121274" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">17</span>
+                <span class="pub-title">MFAE: Multilevel Feature Aggregation Enhanced Drug-Target Affinity Prediction for Drug Repurposing Against Colorectal Cancer</span>
+                <span class="if-badge">IF: 6.8</span>
+                <div class="pub-authors"><strong>G. Chen</strong>*, H. He*, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Advanced Intelligent Systems, 2024, 6(3): 2300546</div>
+                <a href="http://dx.doi.org/10.1002/aisy.202300546" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">28</span>
+                <span class="pub-title">FusionDTA: attention-based feature polymerizer and knowledge distillation for drug-target binding affinity prediction</span>
+                <span class="if-badge">IF: 13.99</span>
+                <div class="pub-authors">W. Yuan*, <strong>G. Chen</strong>*, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Briefings in Bioinformatics, 2022, 23(1): bbab506</div>
+                <a href="https://doi.org/10.1093/bib/bbab506" class="pub-link">[Paper]</a>
+            </div>
+        </section>
+
+        <!-- AI for Traditional Chinese Medicine -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-image">
+                    <img src="path/to/tcm-figure.png" alt="TCM AI" style="max-width: 100%; max-height: 100%;">
+                </div>
+                <div class="category-info">
+                    <h2>AI for Traditional Chinese Medicine</h2>
+                    <p class="category-description">Building the world's largest TCM database and developing AI methods to modernize traditional medicine for drug discovery.</p>
+                </div>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">7</span>
+                <span class="pub-title">AI Empowering Traditional Chinese Medicine?</span>
+                <span class="if-badge">IF: 8.4</span>
+                <div class="pub-authors">Z. Song*, <strong>G. Chen</strong>*, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Chemical Science, 2024, 15(41): 16844-16886</div>
+                <a href="https://doi.org/10.1039/D4SC04107K" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">21</span>
+                <span class="pub-title">TCMBank: bridges between the largest herbal medicines, chemical ingredients, target proteins, and associated diseases with intelligence text mining</span>
+                <span class="if-badge">IF: 8.4</span>
+                <div class="pub-authors">Q. Lv*, <strong>G. Chen</strong>*, H. Hao*, Z. Yang, L. Zhao, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Chemical Science, 2023, 14(39): 10684-10701</div>
+                <a href="http://dx.doi.org/10.3389/fmolb.2023.1227371" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">25</span>
+                <span class="pub-title">TCMBank-the largest TCM database provides deep learning-based Chinese-Western medicine exclusion prediction</span>
+                <span class="if-badge">IF: 39.3</span>
+                <div class="pub-authors">Q. Lv*, <strong>G. Chen</strong>*, H. Hao*, Z. Yang, L. Zhao, K. Zhang, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Signal Transduction and Targeted Therapy, 2023, 8(1)</div>
+                <a href="https://doi.org/10.1038/s41392-023-01339-1" class="pub-link">[Paper]</a>
+            </div>
+        </section>
+
+        <!-- Protein Structure & Antibody Design -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-image">
+                    <img src="path/to/protein-figure.png" alt="Protein Design" style="max-width: 100%; max-height: 100%;">
+                </div>
+                <div class="category-info">
+                    <h2>Protein Structure & Antibody Design</h2>
+                    <p class="category-description">Leveraging transformer networks and language models for protein secondary structure prediction, antibody generation, and molecular design.</p>
+                </div>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">2</span>
+                <span class="pub-title">Pre-trained language models for protein and molecular design</span>
+                <span class="if-badge">IF: 2.9</span>
+                <div class="pub-authors">E. Zhang, Z. Pan, Z. Yao, T. Dong, <strong>G. Chen</strong>, T. Deng, S. Chen, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Physical Chemistry Chemical Physics, 2025, 27(27): 14189-14216</div>
+                <a href="https://doi.org/10.1021/acs.jctc.4c00663" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">8</span>
+                <span class="pub-title">De novo generation of SARS-CoV-2 antibody CDRH3 with a pre-trained generative large language model</span>
+                <span class="if-badge">IF: 14.7</span>
+                <div class="pub-authors">H. He, B. He†, L. Guan, Y. Zhao, F. Jiang, <strong>G. Chen</strong>, Q. Zhu, C.Y.-C. Chen†, T. Li†, J. Yao†</div>
+                <div class="pub-venue">Nature Communications, 2024, 15(1): 6867</div>
+                <a href="http://dx.doi.org/10.1038/s41467-024-50903-y" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">10</span>
+                <span class="pub-title">MFTrans: A multi-feature transformer network for protein secondary structure prediction</span>
+                <span class="if-badge">IF: 7.7</span>
+                <div class="pub-authors">Y. Chen*, <strong>G. Chen</strong>*, C.Y.-C. Chen†</div>
+                <div class="pub-venue">International Journal of Biological Macromolecules, 2024, 267: 131311</div>
+                <a href="http://dx.doi.org/10.1016/j.ijbiomac.2024.131311" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">14</span>
+                <span class="pub-title">PSSP-MFFNet: A Multifeature Fusion Network for Protein Secondary Structure Prediction</span>
+                <span class="if-badge">IF: 3.7</span>
+                <div class="pub-authors">Y. Chen*, <strong>G. Chen</strong>*, C.Y.-C. Chen†</div>
+                <div class="pub-venue">ACS omega, 2024, 9(5): 5985-5994</div>
+                <a href="http://dx.doi.org/10.1021/acsomega.3c10230" class="pub-link">[Paper]</a>
+            </div>
+        </section>
+
+        <!-- Graph Neural Networks for Drug Discovery -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-image">
+                    <img src="path/to/gnn-figure.png" alt="Graph Neural Networks" style="max-width: 100%; max-height: 100%;">
+                </div>
+                <div class="category-info">
+                    <h2>Graph Neural Networks for Drug Discovery</h2>
+                    <p class="category-description">Advancing GNN architectures for molecular property prediction, drug-drug interactions, and low-data drug discovery scenarios.</p>
+                </div>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">9</span>
+                <span class="pub-title">Interaction-Based Inductive Bias in Graph Neural Networks: Enhancing Protein-Ligand Binding Affinity Predictions From 3D Structures</span>
+                <span class="if-badge">IF: 20.8</span>
+                <div class="pub-authors">Z. Yang, W. Zhong, Q. Lv, T. Dong, <strong>G. Chen</strong>, C.Y.-C. Chen†</div>
+                <div class="pub-venue">IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024</div>
+                <a href="http://dx.doi.org/10.1109/TPAMI.2024.3400515" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">13</span>
+                <span class="pub-title">Integrating Sequence and Graph Information for Enhanced Drug-Target Affinity Prediction</span>
+                <span class="if-badge">IF: 7.3</span>
+                <div class="pub-authors">H. He*, <strong>G. Chen</strong>*, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Science China Information Sciences, 2024, 67(2): 129101</div>
+                <a href="http://dx.doi.org/10.1007/s11432-022-3793-7" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">15</span>
+                <span class="pub-title">Meta-MolNet: A Cross-Domain Benchmark for Few Examples Drug Discovery</span>
+                <span class="if-badge">IF: 10.2</span>
+                <div class="pub-authors">Q. Lv, <strong>G. Chen</strong>, Z. Yang, W. Zhong, C.Y.-C. Chen†</div>
+                <div class="pub-venue">IEEE Transactions on Neural Networks and Learning Systems, 2024</div>
+                <a href="http://dx.doi.org/10.1109/TNNLS.2024.3359657" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">24</span>
+                <span class="pub-title">NHGNN-DTA: a node-adaptive hybrid graph neural network for interpretable drug-target binding affinity prediction</span>
+                <span class="if-badge">IF: 6.931</span>
+                <div class="pub-authors">H. He*, <strong>G. Chen</strong>*, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Bioinformatics, 2023, 39(6): btad355</div>
+                <a href="https://doi.org/10.1093/bioinformatics/btad355" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">26</span>
+                <span class="pub-title">Meta learning with graph attention networks for low-data drug discovery</span>
+                <span class="if-badge">IF: 14.26</span>
+                <div class="pub-authors">Q. Lv, <strong>G. Chen</strong>, Z. Yang, W. Zhong, C.Y.-C. Chen†</div>
+                <div class="pub-venue">IEEE Transactions on Neural Networks and Learning Systems, 2023</div>
+                <a href="https://doi.org/10.1109/TNNLS.2023.3250324" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">27</span>
+                <span class="pub-title">DSIL-DDI: a domain-invariant substructure interaction learning for generalizable drug-drug interaction prediction</span>
+                <span class="if-badge">IF: 14.26</span>
+                <div class="pub-authors">Z. Tang, <strong>G. Chen</strong>, H. Yang, W. Zhong, C.Y.-C. Chen†</div>
+                <div class="pub-venue">IEEE Transactions on Neural Networks and Learning Systems, 2023</div>
+                <a href="https://doi.org/10.1109/TNNLS.2023.3242656" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">29</span>
+                <span class="pub-title">3DGT-DDI: 3D graph and text based neural network for drug-drug interaction prediction</span>
+                <span class="if-badge">IF: 13.99</span>
+                <div class="pub-authors">H. He*, <strong>G. Chen</strong>*, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Briefings in Bioinformatics, 2022, 23(3): bbac134</div>
+                <a href="https://doi.org/10.1093/bib/bbac134" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">30</span>
+                <span class="pub-title">Machine learning and graph neural network for finding potential drugs related to multiple myeloma</span>
+                <span class="if-badge">IF: 3.93</span>
+                <div class="pub-authors">H. He*, <strong>G. Chen</strong>*, C.Y.-C. Chen†</div>
+                <div class="pub-venue">New Journal of Chemistry, 2022, 46(11): 5188-5200</div>
+                <a href="https://doi.org/10.1039/D1NJ04935F" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">33</span>
+                <span class="pub-title">Mol2Context-vec: learning molecular representation from context awareness for drug discovery</span>
+                <span class="if-badge">IF: 13.99</span>
+                <div class="pub-authors">Q. Lv*, <strong>G. Chen</strong>*, L. Zhao, W. Zhong, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Briefings in Bioinformatics, 2021, 22(6): bbab317</div>
+                <a href="https://doi.org/10.1093/bib/bbab317" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">35</span>
+                <span class="pub-title">Predicting drug-target interactions with deep-embedding learning of graphs and sequences</span>
+                <span class="if-badge">IF: 2.94</span>
+                <div class="pub-authors">W. Chen*, <strong>G. Chen</strong>*, L. Zhao, C.Y.-C. Chen†</div>
+                <div class="pub-venue">The Journal of Physical Chemistry A, 2021, 125(25): 5633-5642</div>
+                <a href="https://doi.org/10.1021/acs.jpca.1c02419" class="pub-link">[Paper]</a>
+            </div>
+        </section>
+
+        <!-- Clinical Applications & Medical Imaging -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-image">
+                    <img src="path/to/clinical-figure.png" alt="Clinical Applications" style="max-width: 100%; max-height: 100%;">
+                </div>
+                <div class="category-info">
+                    <h2>Clinical Applications & Medical Imaging</h2>
+                    <p class="category-description">Translating AI research into clinical practice through collaborations on cancer diagnosis, biomarker discovery, and personalized treatment.</p>
+                </div>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">5</span>
+                <span class="pub-title">Knowledge-Based Inductive Bias and Domain Adaptation: Enhancing Cell Type Annotation Across Batches</span>
+                <span class="if-badge">IF: 5.2</span>
+                <div class="pub-authors">Z. Tang, <strong>G. Chen</strong>, S. Chen, H. He, L. You†, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Communications Biology, 2024, 7(1): 1440</div>
+                <a href="https://doi.org/10.1038/s42003-024-07171-9" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">12</span>
+                <span class="pub-title">Dynamic network biomarker C1QTNF1 regulates tumor formation at the tipping point of hepatocellular carcinoma</span>
+                <span class="if-badge">IF: 3.1</span>
+                <div class="pub-authors">H. Yu*, X. Yan*, <strong>G. Chen</strong>*, R. Li, Z. Yang, Z. Liang, L. Ye†, Y. Chen†, Y. Li†</div>
+                <div class="pub-venue">Biomolecules and Biomedicine, 2024, 24(4): 939</div>
+                <a href="http://dx.doi.org/10.17305/bb.2024.10103" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">16</span>
+                <span class="pub-title">Discovery of Kinetin in inhibiting colorectal cancer progression via enhancing PSMB1-mediated RAB34 degradation</span>
+                <span class="if-badge">IF: 9.1</span>
+                <div class="pub-authors">X. Jiang*, L. Yang*, <strong>G. Chen</strong>, X. Feng, Y. Liu, Q. Gao, M. Mai, C.Y.-C. Chen, S. Ye, Z. Yang†</div>
+                <div class="pub-venue">Cancer Letters, 2024, 584: 216600</div>
+                <a href="http://dx.doi.org/10.1016/j.canlet.2023.216600" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">19</span>
+                <span class="pub-title">MRI-based automated machine learning model for preoperative identification of variant histology in muscle-invasive bladder carcinoma</span>
+                <span class="if-badge">IF: 5.9</span>
+                <div class="pub-authors">J. Huang*, <strong>G. Chen</strong>*, H. Liu, W. Jiang, S. Mai, L. Zhang, H. Zeng, S. Wu, C.Y.-C. Chen†, Z. Wu†</div>
+                <div class="pub-venue">European Radiology, 2024, 34(3): 1804-1815</div>
+                <a href="http://dx.doi.org/10.3389/fmolb.2023.1227371" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">22</span>
+                <span class="pub-title">Aquaporin 9 is involved in CRC metastasis through DVL2-dependent Wnt/β-catenin signaling activation</span>
+                <span class="if-badge">IF: 3.8</span>
+                <div class="pub-authors">Y. Liu*, Q. Gao*, X. Feng*, <strong>G. Chen</strong>, X. Jiang, D. Chen, Z. Yang†</div>
+                <div class="pub-venue">Gastroenterology Report, 2023, 11: goad033</div>
+                <a href="http://dx.doi.org/10.1093/gastro/goad033" class="pub-link">[Paper]</a>
+            </div>
+        </section>
+
+        <!-- Drug Repurposing for Specific Diseases -->
+        <section class="category-section">
+            <div class="category-header">
+                <div class="category-image">
+                    <img src="path/to/repurposing-figure.png" alt="Drug Repurposing" style="max-width: 100%; max-height: 100%;">
+                </div>
+                <div class="category-info">
+                    <h2>Drug Repurposing for Specific Diseases</h2>
+                    <p class="category-description">AI-driven drug repurposing targeting major diseases including colorectal cancer, breast cancer, Alzheimer's disease, and diabetes.</p>
+                </div>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">18</span>
+                <span class="pub-title">Multi-perspective neural network for dual drug repurposing in Alzheimer's disease</span>
+                <span class="if-badge">IF: 8.8</span>
+                <div class="pub-authors">L. Zhao, Z. Li, <strong>G. Chen</strong>, Y. Yin, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Knowledge-Based Systems, 2024, 283: 111195</div>
+                <a href="http://dx.doi.org/10.1002/aisy.202300546" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">23</span>
+                <span class="pub-title">Hybrid Neural Network Approaches to Predict Drug-Target Binding Affinity for Drug Repurposing: Screening for Potential Leads for Alzheimer's Disease</span>
+                <span class="if-badge">IF: 5.0</span>
+                <div class="pub-authors">X. Wu, Z. Li, <strong>G. Chen</strong>, Y. Yin, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Frontiers in Molecular Biosciences, 2023, 10: 1227371</div>
+                <a href="http://dx.doi.org/10.3389/fmolb.2023.1227371" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">31</span>
+                <span class="pub-title">VAERHNN: Voting-averaged ensemble regression and hybrid neural network to investigate potent leads against colorectal cancer</span>
+                <span class="if-badge">IF: 8.14</span>
+                <div class="pub-authors"><strong>G. Chen</strong>, X. Jiang, Q. Lv, X. Tan, Z. Yang, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Knowledge-Based Systems, 2022, 257: 109925</div>
+                <a href="https://doi.org/10.1016/j.knosys.2022.109925" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">32</span>
+                <span class="pub-title">Adaptive boost approach for possible leads of triple-negative breast cancer</span>
+                <span class="if-badge">IF: 4.18</span>
+                <div class="pub-authors"><strong>G. Chen</strong>, H. He, L. Zhao, K.-B. Chen, S. Li, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Chemometrics and Intelligent Laboratory Systems, 2022, 231: 104690</div>
+                <a href="https://doi.org/10.1016/j.chemolab.2022.104690" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">33</span>
+                <span class="pub-title">Novel and versatile artificial intelligence algorithms for investigating possible GHSR1a and DRD1 agonists for Alzheimer's disease</span>
+                <span class="if-badge">IF: 4.04</span>
+                <div class="pub-authors">Z. Tang*, L. Zhao*, <strong>G. Chen</strong>, C.Y.-C. Chen†</div>
+                <div class="pub-venue">RSC advances, 2021, 11(12): 6423-6446</div>
+                <a href="https://doi.org/10.1039/D0RA10077C" class="pub-link">[Paper]</a>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-number">34</span>
+                <span class="pub-title">A novel artificial intelligence protocol to investigate potential leads for diabetes mellitus</span>
+                <span class="if-badge">IF: 3.36</span>
+                <div class="pub-authors">J. Gong*, L. Zhao*, <strong>G. Chen</strong>*, X. Chen, Z. Chen, C.Y.-C. Chen†</div>
+                <div class="pub-venue">Molecular Diversity, 2021, 25: 1375-1393</div>
+                <a href="https://doi.org/10.1007/s11030-021-10204-8" class="pub-link">[Paper]</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Guanxing Chen. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="mailto:chengx48@mail2.sysu.edu.cn" style="color: var(--text-secondary);">Email</a> | 
+                <a href="https://scholar.google.com/citations?user=DLL3hYIAAAAJ&hl=zh-CN" style="color: var(--text-secondary);">Google Scholar</a> | 
+                <a href="https://www.researchgate.net/profile/Guanxing-Chen-3/research" style="color: var(--text-secondary);">ResearchGate</a> | 
+                <a href="https://orcid.org/0000-0002-4435-0884" style="color: var(--text-secondary);">ORCID</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
