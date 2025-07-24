@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guanxing Chen - AI for Drug Discovery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066cc;
+            --text-primary: #222;
+            --text-secondary: #666;
+            --bg-light: #f8f9fa;
+            --border: #e0e0e0;
+            --link-hover: #0052a3;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            background: white;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0 4rem;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            /* text-align: justify; */
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* 取消 intro 段落中链接的下划线 */
+        .intro a {
+            text-decoration: none;
+            color: var(--primary);   /* 保持原来的配色 */
+            transition: color 0.2s;
+        }
+
+        /* 如果想在 hover 时再显示下划线或变色，可以这样写 */
+        .intro a:hover {
+           text-decoration: underline;
+           color: var(--link-hover);
+        }
+
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info span {
+            color: var(--text-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: var(--link-hover);
+        }
+
+        .portrait {
+            width: 280px;
+            height: 280px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-top: 6rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 2rem 0;
+            background: var(--bg-light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* News Section */
+        .news-section {
+            padding: 4rem 0;
+        }
+
+        /* 隐藏多余的 news-item */
+        .news-item.hidden {
+            display: none;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            gap: 1rem;
+        }
+
+        /* News 列表布局 */
+        .news-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        
+        .news-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .news-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .news-date {
+            color: var(--text-secondary);
+            min-width: 90px;
+            font-weight: 500;
+        }
+
+        .news-date {
+            color: var(--text-secondary);
+            min-width: 90px;
+            font-weight: 500;
+        }
+
+        .news-more {
+            text-align: center;
+            margin-top: 1rem;
+        }
+    
+        .news-more a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .news-more a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* Research Highlights */
+        .research-highlights {
+            padding: 2rem 0;
+            /* background: var(--bg-light); */
+        }
+
+        .research-highlights h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .highlight-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .highlight-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Education Section */
+        .education-section {
+            padding: 4rem 0;
+        }
+
+        .education-item {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .education-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .education-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .education-details {
+            color: var(--text-secondary);
+        }
+
+        /* Service Section */
+        .service-section {
+            padding: 4rem 0;
+            /* background: var(--bg-light); */
+        }
+
+        .service-grid {
+            background: white;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .service-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* 招募信息条 */
+        .recruit-banner {
+            background: var(--bg-light);           /* 浅灰背景 */
+            border-left: 4px solid var(--primary); /* 左侧主色条 */
+            padding: 1rem 1.5rem;                  /* 内边距 */
+            margin: 0.5rem 0;                     /* 上下间距 */
+            border-radius: 4px;
+            /* text-transform: uppercase; */
+            font-weight: bold;
+            font-style: italic;                    轻微圆角
+        }
+
+        .recruit-banner p {
+            margin: 0.75rem auto 1.5rem auto;
+            color: var(--text-primary);
+            font-weight: bold;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .recruit-banner a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+/* Latest Publications 样式 */
+.latest-publications {
+  padding: 3rem 0;
+  /* background: var(--bg-light); */
+}
+.latest-publications h2 {
+  font-size: 1.75rem;
+  /* color: var(--primary); */
+  margin-bottom: 0.5rem;
+}
+.latest-publications p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+.latest-publications p a {
+  color: var(--primary);
+  text-decoration: none;
+}
+.latest-publications p a:hover {
+  text-decoration: underline;
+}
+.latest-list {
+  list-style: none;
+  padding: 0;
+}
+.latest-list li {
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+.pub-venue {
+  color: var(--primary);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .portrait {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" style="font-weight: 600; text-decoration: none; color: var(--text-primary);">Guanxing Chen</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <!-- <li><a href="#education">Education</a></li> -->
+                <!-- <li><a href="#service">Service</a></li> -->
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div>
+                <h1>Hi, I'm Guanxing CHEN!</h1>
+                <p class="intro">
+                    I'm currently a Research Assistant Professor (Co-PI) at <strong>City University of Hong Kong (Dongguan)</strong>, co-supervising the CityU-DG HANI Lab with Asst. Prof. <a href="https://scholar.google.com/citations?user=_1nrBFAAAAAJ&hl=en" style="color: var(--primary);">Zhi-An Huang</a>.
+                    Before that, I obtained my B.E. (2019), M.E. (2021), and Ph.D. (2025) degrees at the School of Intelligent Engineering, <strong>Sun Yat-sen University</strong>, supervised by Prof. <a href="https://www.ece.pku.edu.cn/info/1046/2660.htm" style="color: var(--primary);">Prof. Calvin Yu-Chian Chen</a> and Prof. <a href="https://ise.sysu.edu.cn/teacher/TanXiaojun" style="color: var(--primary);">Xiaojun Tan</a>. I was a special research student (funded by CSC scholarship, 2023.9~2024.10) at the <a href="https://fais.hgc.jp/" style="color: var(--primary);">Laboratory of Functional Analysis in silico</a>, Institute of Medical Science, <strong>University of Tokyo</strong>, supervised by Prof. <a href="https://www.hgc.jp/~knakai/" style="color: var(--primary);">Prof. Kenta Nakai</a>.
+                    My research focuses on AI for life sciences, especially drug discovery, biomolecule generation, virtual cells, etc.
+                </p>
+                
+                <div class="contact-info">
+                    <div><strong>📧 Email:</strong> <span>guanxing.chen@cityu-dg.edu.cn</span></div>
+                    <div><strong>📞 Phone:</strong> <span>+86 137 1920 6018 (WeChat)</span></div>
+                    <div><strong>🏠 Address:</strong> <span>City University of Hong Kong (Dongguan), Songshan Lake Zone, Dongguan, Guangdong 523808, China</span></div>
+                    <div><strong>🔍 Research Interests:</strong> <span>AI for Life Sciences</span></div>
+                    <!-- <div><strong>Last update:</strong> <span>2025.01</span></div> -->
+                </div>
+
+                <div class="social-links">
+                    <!-- <a href="mailto:chengx48@mail2.sysu.edu.cn">Email</a> -->
+                    <a href="https://scholar.google.com/citations?user=DLL3hYIAAAAJ&hl=zh-CN">Google Scholar</a>
+                    <a href="https://www.researchgate.net/profile/Guanxing-Chen-3/research">ResearchGate</a>
+                    <a href="https://orcid.org/0000-0002-4435-0884">ORCID</a>
+                    <a href="https://www.linkedin.com/in/guanxing-chen-335893299/">LinkedIn</a>
+                    <!-- <a href="#">GitHub</a> -->
+                </div>
+                
+            </div>
+            <img src="images/myself.jpg" alt="Guanxing Chen" class="portrait" />
+
+        </section>
+        <div class="recruit-banner">
+            Collaborators are welcome! I am recruiting motivated visiting students/Master students (to be co‑supervised by myself and Asst. Prof. Zhi-An Huang). If you are interested, please directly send your CV to my email.
+        </div>
+    </main>
+
+    <!-- Stats Section -->
+    <!-- <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>36</h3>
+                    <p>Publications</p>
+                </div>
+                <div class="stat-item">
+                    <h3>720+</h3>
+                    <p>Citations</p>
+                </div>
+                <div class="stat-item">
+                    <h3>15</h3>
+                    <p>H-index</p>
+                </div>
+                <div class="stat-item">
+                    <h3>8</h3>
+                    <p>Years Research</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- News Section -->
+    <!-- <section class="news-section">
+        <div class="container">
+            <h2>News and Highlights</h2>
+            <ul class="news-list">
+                <li class="news-item">
+                    <span class="news-date">[2025/01]</span>
+                    <span>Paper accepted in <strong>npj Digital Medicine</strong> (IF: 12.4) on dual modality feature fusion for drug-target affinity prediction.</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2025/01]</span>
+                    <span>Paper accepted in <strong>Information Fusion</strong> (IF: 15.5) on unified heterogeneous cellular data integration.</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2024/11]</span>
+                    <span>Awarded National Scholarship for Doctoral Students (2nd time).</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2024/10]</span>
+                    <span>Two papers published in <strong>Nature Communications</strong> (IF: 14.7) on multi-modality cellular data and SARS-CoV-2 antibody generation.</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2024/09]</span>
+                    <span>Leading Huawei collaboration project on foundational models for chemical reaction generation.</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2024/05]</span>
+                    <span>Paper published in <strong>IEEE TPAMI</strong> (IF: 20.8) on graph neural networks for protein-ligand binding.</span>
+                </li>
+            </ul>
+        </div>
+    </section> -->
+
+
+
+    <!-- News Section -->
+    <section class="news-section">
+        <div class="container">
+            <h2>News and Highlights</h2>
+            <ul class="news-list">
+                <!-- 前 8 条，始终可见 -->
+                <li class="news-item">
+                    <span class="news-date">[2025.07]</span>
+                    <span><strong>🎉</strong> Became a <strong>Research Assistant Professor</strong> at City University of Hong Kong (Dongguan)!</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2025.07]</span>
+                    <span><strong>📄</strong> Paper published in <strong>Information Fusion</strong> on Modal-NexT for cellular data integration!</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2025.06]</span>
+                    <span><strong>🎓</strong> Received the <strong>PhD</strong> degree from Sun Yat-sen University!</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2025.06]</span>
+                    <span><strong>📝</strong> Review published in <strong>Physical Chemistry Chemical Physics</strong> on pre-trained language models for molecular design!</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2025.03]</span>
+                    <span><strong>🏆</strong>Received <strong>Shenzhen AI Natural Science Award</strong> as third contributor!</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2025.01]</span>
+                    <span><strong>📄</strong> Paper accepted in <strong>npj Digital Medicine</strong> on dual modality drug-target affinity prediction!</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2024.12]</span>
+                    <span><strong>📄</strong> Awarded <strong>National Scholarship for Doctoral Students</strong> for the second time!</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2024.10]</span>
+                    <span><strong>📄</strong> Paper published in <strong>Nature Communications</strong> on modal-nexus auto-encoder for multi-modality integration! </span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2024.09]</span>
+                    <span><strong>📄</strong> Paper published in <strong>Journal of Chemical Theory and Computation</strong> on MMFA-DTA for COVID-19 drug repurposing!</span>
+                </li>
+                <li class="news-item">
+                    <span class="news-date">[2024.08]</span>
+                    <span><strong>📄</strong> Paper published in <strong>Nature Communications</strong> on SARS-CoV-2 antibody generation with LLMs!</span>
+                </li>
+
+                <!-- 隐藏的其余条目 -->
+                <li class="news-item hidden">
+                    <span class="news-date">[2024.07]</span>
+                    <span><strong>📄</strong> Paper published in <strong>Communications Biology</strong> on knowledge-based cell type annotation!</span>
+                </li>
+                <li class="news-item hidden">
+                    <span class="news-date">[2024.06]</span>
+                    <span><strong>📝</strong> Review published in <strong>Chemical Science</strong> on comprehensive review on AI empowering TCM!</span>
+                </li>
+                <li class="news-item hidden">
+                    <span class="news-date">[2024.05]</span>
+                    <span><strong>📄</strong> Paper published in <strong>IEEE TPAMI</strong> on GNNs for protein-ligand binding affinity prediction!</span>
+                </li>
+                <li class="news-item hidden">
+                    <span class="news-date">[2024.03]</span>
+                    <span><strong>📄</strong> Paper in <strong>AAAI 2024</strong> (CCF-A conference) on single-cell multimodal integration!</span>
+                </li>
+
+                <li class="news-item hidden">
+                    <span class="news-date">[2023.12]</span>
+                    <span><strong>🏆</strong> Awarded <strong>National Scholarship for Doctoral Students</strong>!</span>
+                </li>
+                <li class="news-item hidden">
+                    <span class="news-date">[2023.10]</span>
+                    <span><strong>📝</strong><a href="http://tcmbank.cn/N" style="color: var(--text-secondary);">TCMBank</a> published in <strong>Signal Transduction and Targeted Therapy</strong>!</span>
+                </li>
+                <li class="news-item hidden">
+                    <span class="news-date">[2023.06]</span>
+                    <span><strong>📄</strong> Paper published in <strong>Bioinformatics</strong>!</span>
+                </li>
+
+                  <!-- “More…” 链接 -->
+                <li class="news-more"><a href="#" id="toggleNews">More…</a></li>
+            </ul>
+        </div>
+    </section>
+
+
+
+    <!-- Latest Publications Section -->
+<!-- Latest Publications Section -->
+<section class="latest-publications">
+  <div class="container">
+    <h2>Latest Publications</h2>
+    <p style="margin-top: 0.5rem; color: var(--text-secondary);">* denotes equal contribution, † denotes corresponding author. Check out <a href="publications.html">this page</a> to learn more about my research!</p>
+    <ul class="latest-list">
+      <li>
+        <span class="pub-venue">[Information Fusion]</span>
+        <span class="pub-title">Modal‑NexT: Toward unified heterogeneous cellular data integration.</span>
+        <a class="pub-link" href="https://doi.org/10.1021/acs.jctc.4c00663" class="pub-link">[Paper]</a><br>
+        Z. Tang, <strong>G. Chen</strong>, S. Chen, H. He, J. Huang, T. Dong, J. Zhou, L. Zhao, L. You†, C.Y.‑C. Chen†
+      </li>
+      <li>
+        <span class="pub-venue">[Phys Chem Chem Phys]</span>
+        <span class="pub-title">Pre‑trained language models for protein and molecular design.</span>
+        <a class="pub-link" href="https://doi.org/10.1021/acs.jctc.4c00663" class="pub-link">[Paper]</a><br>
+        E. Zhang, Z. Pan, Z. Yao, T. Dong, <strong>G. Chen</strong>, T. Deng, S. Chen, C.Y.‑C. Chen
+      </li>
+      <li>
+        <span class="pub-venue">[npj Digital Medicine]</span>
+        <span class="pub-title">Dual modality feature fused neural network integrating binding site information for DTA.</span>
+        <a class="pub-link" href="https://doi.org/10.1038/s41746-025-01464-x" class="pub-link">[Paper]</a><br>
+        H. He*, <strong>G. Chen*</strong>, Z. Tang, C.Y.‑C. Chen†
+      </li>
+      <li>
+        <span class="pub-venue">[IEEE TPAMI]</span>
+        <span class="pub-title">Interaction‑Based Inductive Bias in Graph Neural Networks: Enhancing Protein‑Ligand Binding Affinity Predictions From 3D Structures.</span>
+        <a class="pub-link" href="http://dx.doi.org/10.1109/TPAMI.2024.3400515" class="pub-link">[Paper]</a><br>
+        Z. Yang, W. Zhong, Q. Lv, T. Dong, <strong>G. Chen</strong>, C.Y.‑C. Chen†
+      </li>
+      <li>
+        <span class="pub-venue">[J. Chem. Theory Comput.]</span>
+        <span class="pub-title">MMFA‑DTA: Multi‑Modal Feature Attention Fusion Network for Drug‑Target Affinity Prediction for Drug Repurposing Against SARS‑CoV‑2.</span>
+        <a class="pub-link" href="https://doi.org/10.1021/acs.jctc.4c00663" class="pub-link">[Paper]</a><br>
+        <strong>G. Chen</strong>*, H. He*, Q. Lv*, L. Zhao, C.Y.‑C. Chen†
+      </li>
+      <li>
+        <span class="pub-venue">[Communications Biology]</span>
+        <span class="pub-title">Knowledge‑Based Inductive Bias and Domain Adaptation: Enhancing Cell Type Annotation Across Batches.</span>
+        <a class="pub-link" href="https://doi.org/10.1038/s42003-024-07171-9" class="pub-link">[Paper]</a><br>
+        Z. Tang, <strong>G. Chen</strong>, S. Chen, H. He, L. You†, C.Y.‑C. Chen†
+      </li>
+      <li>
+        <span class="pub-venue">[Nature Communications]</span>
+        <span class="pub-title">Modal‑nexus auto‑encoder for multi‑modality cellular data integration and imputation.</span>
+        <a class="pub-link" href="https://doi.org/10.1038/s41467-024-53355-6" class="pub-link">[Paper]</a><br>
+        Z. Tang, <strong>G. Chen</strong>, S. Chen, L. You†, C.Y.‑C. Chen†
+      </li>
+      <li>
+        <span class="pub-venue">[Nature Communications]</span>
+        <span class="pub-title">De novo generation of SARS‑CoV‑2 antibody CDRH3 with a pre‑trained generative large language model.</span>
+        <a class="pub-link" href="http://dx.doi.org/10.1038/s41467-024-50903-y" class="pub-link">[Paper]</a><br>
+        H. He, B. He†, L. Guan, Y. Zhao, F. Jiang, <strong>G. Chen</strong>, Q. Zhu, C.Y.-C. Chen†, T. Li†, J. Yao†
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+    
+    <!-- Research Highlights -->
+    <section class="research-highlights">
+        <div class="container">
+            <h2>Research Highlights</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">My interdisciplinary research bridges AI and bioinformatics to advance drug discovery and precision medicine.</p>
+            
+            <div class="highlight-cards">
+                <div class="highlight-card">
+                    <h3>🧬 Multi-modal AI for Biology</h3>
+                    <p>Developing cutting-edge multi-modal fusion methods for integrating diverse biological data, including drug-target interactions, cellular data, and molecular representations.</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <h3>💊 Drug Repurposing</h3>
+                    <p>Creating AI models to identify new therapeutic uses for existing drugs, with focus on COVID-19, cancer, and neurodegenerative diseases.</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <h3>🌿 AI for Traditional Medicine</h3>
+                    <p>Building the world's largest TCM database (TCMBank) and developing AI methods to bridge traditional Chinese medicine with modern drug discovery.</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <h3>🤖 Graph Neural Networks</h3>
+                    <p>Advancing GNN architectures for molecular property prediction, drug-drug interactions, and protein-ligand binding affinity prediction.</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <h3>🏥 Clinical Applications</h3>
+                    <p>Translating AI research into clinical practice through collaborations on cancer diagnosis, biomarker discovery, and personalized treatment.</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <h3>🔬 Protein Design</h3>
+                    <p>Leveraging transformer networks and language models for protein secondary structure prediction and antibody design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <!-- <section id="education" class="education-section">
+        <div class="container">
+            <h2>Education</h2>
+            
+            <div class="education-item">
+                <div class="education-title">Sun Yat-sen University, 2021.9-2025.6</div>
+                <div class="education-details">• Ph.D. in Computer Science and Technology</div>
+                <div class="education-details">• Advisor: Prof. Calvin Yu-Chian Chen</div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-title">University of Tokyo, 2023.10-2024.9</div>
+                <div class="education-details">• Special Research Student (CSC Scholarship)</div>
+                <div class="education-details">• Advisor: Prof. Kenta Nakai</div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-title">Sun Yat-sen University, 2019.9-2021.6</div>
+                <div class="education-details">• Master of Control Engineering</div>
+                <div class="education-details">• Advisor: Prof. Xiaojun Tan</div>
+            </div>
+
+            <div class="education-item">
+                <div class="education-title">Sun Yat-sen University, 2015.8-2019.6</div>
+                <div class="education-details">• Bachelor of Energy and Power Engineering</div>
+                <div class="education-details">• Advisor: Prof. Jing Ding</div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Service Section -->
+    <section id="service" class="service-section">
+        <div class="container">
+            <h2>Professional Services & Awards</h2>
+            
+            <div class="service-grid">
+                <div class="service-item">
+                    <div class="service-title">🏆 Recent Awards</div>
+                    <div>• Shenzhen AI Natural Science Award (2025)</div>
+                    <div>• National Doctoral Scholarship (2023, 2024)</div>
+                    <div>• CSC Scholarship (2023)</div>
+                </div>
+                
+                <div class="service-item">
+                    <div class="service-title">📝 Research Service</div>
+                    <div>Reviewer for: JCIM, iScience, IEEE TNNLS, Molecular Diversity, European Journal of Pharmacology, BMC Bioinformatics, Scientific Reports</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Guanxing Chen. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="mailto:chengx48@mail2.sysu.edu.cn" style="color: var(--text-secondary);">Email</a> | 
+                <a href="https://scholar.google.com/citations?user=DLL3hYIAAAAJ&hl=zh-CN" style="color: var(--text-secondary);">Google Scholar</a> | 
+                <a href="https://www.researchgate.net/profile/Guanxing-Chen-3/research" style="color: var(--text-secondary);">ResearchGate</a> | 
+                <a href="https://orcid.org/0000-0002-4435-0884" style="color: var(--text-secondary);">ORCID</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        document.getElementById('toggleNews').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.news-item.hidden').forEach(function(li){
+                li.style.display = 'flex';
+            });
+            this.parentElement.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
